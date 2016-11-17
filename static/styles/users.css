@@ -58,6 +58,9 @@ a{
 {
 	color: #fff;
     font-family: 'Open Sans', "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    position: relative;
+    padding: 9px;
+
 }
 .user-info
 {
