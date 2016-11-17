@@ -137,10 +137,10 @@ def listplayers(user=None):
 def listbidders():
     '''hello'''
     ls=[]
-    for val in colbid.find().sort("BValue"):
+    for val in colbid.find().sort("BAvg"):
         if not val['Username'] in admin:
             ls.append(val)
-    rls = {a["Username"]:a["BValue"] for a in ls}
+    rls = {a["Username"]:a["BAvg"] for a in ls}
     return rls
 
 def addshare(bidder, player):
@@ -159,6 +159,7 @@ called by the plus sign in the UI.'''
     curvalue.append(player)
     colbid.update_one({"Username":bidder},{'$set':{'BUsers':curvalue,\
                         'BValue':(curbid-pvalue)}})
+    sharesavg(bidder)
     return 0 #successful updates
 
 def removeshare(bidder, player):
@@ -175,10 +176,20 @@ sign from the UI.'''
     curvalue.remove(player)
     colbid.update_one({"Username":bidder},{'$set':{'BUsers':curvalue,\
                         'BValue':(curbid+pvalue)}})
+    sharesavg(bidder)
     return 0 #sucessful removal
 
-def sharesavg():
-    pass 
+def sharesavg(user):
+    '''doc'''
+    usdata = colbid.find_one({'Username':user})['BValues']
+    total = 0
+    count = 0
+    for a in usdata:
+        player = colbid.find_one({'Username':a})['PValue']
+        total+= player
+        count = count + 1
+    avg = (total/count) + (0.5*count)
+    colbid.update_one({'Username':bidder},{'$set':{'BAvg':avg}})
 
 def validateno(num):
     '''Validates an entry number and convert it to a general format. We have a list
