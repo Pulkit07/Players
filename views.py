@@ -92,19 +92,19 @@ def dashboard(uname):
         return render_template('user-dashboard.html', username = uname,\
                             title = (uname+" | Players"), fullname = res[0],\
                             entryno = res[1], pvalue = res[2], bvalue = res[3],\
-                            bidders = res[4])
+                            bidders = res[4], playing = res[5])
 
     if uname == session['username']:
         return render_template('user-dashboard.html', username = uname, lg_username = uname,\
                             title = "Dashboard | Players", fullname = res[0],\
                             entryno = res[1], pvalue = res[2], bvalue = res[3],\
-                            bidders = res[4])
+                            bidders = res[4], playing = res[5])
 
     return render_template('user-dashboard.html', username = uname,\
                             lg_username = session['username'],\
                             title = (uname+" | Players"), fullname = res[0],\
                             entryno = res[1], pvalue = res[2], bvalue = res[3],\
-                            bidders = res[4])
+                            bidders = res[4], playing = res[5])
 
 @app.route('/rules')
 def help():
