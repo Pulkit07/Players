@@ -200,5 +200,5 @@ def updatevalue():
             return "Pata nahi kya hogaya"
     return "Aisa na hoga beta update"
 
-if __name__ == "__main__":
-    app.run(debug=True)
+#if __name__ == "__main__":
+#    app.run(debug=True)
