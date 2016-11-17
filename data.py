@@ -36,7 +36,8 @@ and 2 if the entry no. has an account previously.'''
         return 2 #Entry No. exists
     diction = {"Name": dic[0], "Username": dic[1], "Entry No": dic[2],\
                 "Password": dic[3], "PValue": meanpvalue(), "BValue": 200,\
-                "BUsers": [], "PEvents":[], "Activated": False, "Aby":''}
+                "BUsers": [], "PEvents":[], "Activated": False, "Aby":'',\
+                "BAvg": 0}
     colbid.insert_one(diction)
     return 0 #Successful insertion
 
@@ -90,11 +91,13 @@ passwords are not equal. Returns 2 if user not found.'''
     name = dic[0]
     password = dic[1]
     rs = colbid.find_one({"Username":name})
+    if not rs:
+        return 2	#user not found
     if not rs['Activated']:
         return 3	#Account no activated
-    if rs and rs["Password"]==password:
+    if rs["Password"]==password:
         return 0	#Succesful login
-    elif rs and rs["Password"]!=password:
+    elif rs["Password"]!=password:
         return 1	#Passwords don't match
     else:
         return 2	#User not found
@@ -173,6 +176,9 @@ sign from the UI.'''
     colbid.update_one({"Username":bidder},{'$set':{'BUsers':curvalue,\
                         'BValue':(curbid+pvalue)}})
     return 0 #sucessful removal
+
+def sharesavg():
+    pass 
 
 def validateno(num):
     '''Validates an entry number and convert it to a general format. We have a list
