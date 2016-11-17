@@ -56,7 +56,7 @@
         </thead>
         {% for player,bidvalue in players.iteritems() %}
           <tr>
-          <td><a href="/user/{{player}}">{{player}}</td>
+          <td><a href="/user/{{player}}">{{loop.index}}.{{player}}</td>
           <td class="playervalue">{{bidvalue}}</td> 
         </tr>
   {% endfor %}
