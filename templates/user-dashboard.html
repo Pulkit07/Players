@@ -61,7 +61,7 @@
     <h3 align="center">Bidding Info</h3>
     <p align="center">Points Available: {{bvalue}}</p>
     <div class="panel panel-default">
-      {% if hasshares %}
+      {% if bidders|length > 0 %}
       <div class="panel-heading players-list">
         {% for bidder in bidders %}
         <li>    <a href="/user/{{bidder}}">{{bidder}}</li>
