@@ -59,7 +59,7 @@
         {% for player, playervalue, sh in players %}
     	    <tr>
           <td>
-            <a href="/user/{{player}}">{{loop.index}}.{{player}}</a>
+            {{loop.index}}. <a href="/user/{{player}}">{{player}}</a>
           </td>
           <td class="playervalue">{{playervalue}}</td> 
           {% if lg_username %}
@@ -85,7 +85,7 @@
         </thead>
         {% for player,playervalue, sh in players %}
         <tr>
-          <td><a href="/user/{{player}}">{{loop.index}}.{{player}}</td>
+          <td>{{loop.index}}. <a href="/user/{{player}}">{{player}}</td>
           <td class="playervalue">{{playervalue}}</td>
         </tr>
   {% endfor %}
