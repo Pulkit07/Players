@@ -60,21 +60,19 @@
   <div class="col-sm-6 bidding">
     <h3 align="center">Bidding Info</h3>
     <p align="center">Points Available: {{bvalue}}</p>
-    {% if hasshares %}
     <div class="panel panel-default">
+      {% if hasshares %}
       <div class="panel-heading players-list">
         {% for bidder in bidders %}
-        <li><a href="/user/{{bidder}}">{{bidder}}</li>
+        <li>    <a href="/user/{{bidder}}">{{bidder}}</li>
         {% endfor %}
       </div>
-    </div>
     {% else %}
-    <div class="panel panel-default">
       <div class="panel-heading">
         <span>No shares available, start playing</span>
       </div>
-    </div>
     {% endif %}
+    </div>
   </div>
   <div class="col-sm-6 playerinfo">
     <h3 align="center">Player Info</h3>
