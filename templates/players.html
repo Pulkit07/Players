@@ -36,7 +36,7 @@
       {% else %}
        <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="/login">Login</a>
+          <a href="/login"><i class="fa fa-user fa-2x" aria-hidden="true"></i> <b>Login</b></a>
         </li>
       </ul>
       {% endif %}
@@ -79,7 +79,6 @@
       <table class="table table-striped">
         <thead>
           <th>Users</th>
-          <th></th>
           <th>Current Value</th>
         </thead>
         {% for player,playervalue, sh in players %}

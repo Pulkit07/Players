@@ -18,16 +18,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Home</a>
+      <a class="navbar-brand" href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <b>Home</b></a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         {% if lg_username %}
-        <li><a href="/user/{{lg_username}}">Dashboard</a></li>
+        <li><a href="/user/{{lg_username}}"><i class="fa fa-dashcube fa-2x" aria-hidden="true"></i> <b>Dashboard</b></a></li>
         {% endif %}
-        <li><a href="/players">Players</a></li>
-        <li><a href="/bidders">Bidders</a></li>
-        <li class="active"><a href="#">Rules <span class="sr-only">Current</span></a></li>
+        <li><a href="/players"><i class="fa fa-play fa-2x" aria-hidden="true"></i> <b>Players</b></a></li>
+        <li><a href="/bidders"><i class="fa fa-btc fa-2x" aria-hidden="true"></i> <b>Bidders</b></a></li>
+        <li class="active"><a href="#"><i class="fa fa-delicious fa-2x" aria-hidden="true"></i> <b>Rules</b> <span class="sr-only">Current</span></a></li>
       </ul>
      {% if lg_username %}
       <ul class="nav navbar-nav navbar-right">
@@ -41,7 +41,7 @@
       {% else %}
        <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="/login">Login</a>
+          <a href="/login"><i class="fa fa-user fa-2x" aria-hidden="true"></i> <b>Login</b></a>
         </li>
       </ul>
       {% endif %}
