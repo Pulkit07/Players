@@ -189,7 +189,7 @@ def sharesavg(user):
         total+= player
         count = count + 1
     avg = (total/count) + (0.5*count)
-    colbid.update_one({'Username':bidder},{'$set':{'BAvg':avg}})
+    colbid.update_one({'Username':user},{'$set':{'BAvg':avg}})
 
 def validateno(num):
     '''Validates an entry number and convert it to a general format. We have a list
