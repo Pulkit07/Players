@@ -37,6 +37,9 @@ def login():
 	return render_template('login.html', title="Login | Players")
     elif request.method == 'POST':
         name = request.form['lg_username'].lower()
+        if ' ' in name:
+            flash("Don't use space in usernames")
+            return redirect(url_for('signup'))
         passw = request.form['lg_password']
         ret = enteruser([name, passw])
         if ret == 0: #Succesfull Login
