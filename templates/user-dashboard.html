@@ -10,7 +10,7 @@
 
 {% block body %}
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -50,6 +50,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<br>
 <div class="user-info">
 <h2 align="center">{{fullname}}({{username}})</h2>
 <h2 align="center">{{entryno}}</h2>
@@ -69,7 +70,7 @@
       </div>
     {% else %}
       <div class="panel-heading">
-        <span>No shares available, start playing</span>
+        <span align="center">No shares available, start playing</span>
       </div>
     {% endif %}
     </div>
@@ -79,7 +80,7 @@
     <p align="center">Share Value: {{pvalue}}</p>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <span>Players detailed Information</span>
+        <span align="center">Players detailed Information</span>
       </div>
     </div>
   </div>

@@ -48,7 +48,7 @@ a{
 {
 	background-color: #00005f;
 	color: #fff;
-	margin-top: -2%;
+	width: 100%;
 }
 .navbar-default .navbar-nav>li>a
 {
@@ -65,10 +65,11 @@ a{
 }
 .user-info
 {
-	background-color: #1589FF;
-	color: #fff;
+	background-color: #e7e7e7;
+	color: black;
 	padding: 10px;
-	border-radius: 10x;
+	margin-top:3%;
+	border-radius: 10px;
 }
 h3
 {
