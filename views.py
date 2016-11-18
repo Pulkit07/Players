@@ -52,7 +52,7 @@ def login():
             flash("Username not found")
             return redirect(url_for('login'))
         elif ret == 3: #Not activated
-            flash("Account not activated")
+            flash("20 rupiya lagega, activate karwa lo account deke")
             return redirect(url_for('login'))
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -128,11 +128,12 @@ def players():
 
 @app.route('/bidders')
 def bidders():
+    rls = listbidders()
     if not session.has_key("username"):
-        return render_template('bidders.html', players = listbidders(),\
+        return render_template('bidders.html', players = zip(rls[0], rls[1]),\
                         title = "Bidders Leaderboard")
     return render_template('bidders.html', lg_username = session['username'],\
-                        players = listbidders(), title = "Bidders Leaderboard")
+                        players = zip(rls[0], rls[1]), title = "Bidders Leaderboard")
 
 @app.route('/logout')
 def logout():

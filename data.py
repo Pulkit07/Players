@@ -1,7 +1,10 @@
-from pymongo import MongoClient
-client = MongoClient()
-db = client['app']
-colbid = db['bidder']
+import collections
+
+import pymongo
+#from pymongo import MongoClient
+client = pymongo.MongoClient()
+db = client['player']
+colbid = db['letsbid']
 
 '''Each user will have the following data stored in database:
 * A unique username stored with key 'Username'
@@ -115,7 +118,7 @@ Returns False if the user does not exists.'''
 def listplayers(user=None):
     '''hello'''
     ls = []
-    for val in colbid.find().sort("PValue"):
+    for val in colbid.find().sort("PValue", pymongo.DESCENDING):
         if not val['Username'] in admin:
             ls.append(val)
     rls = [a["Username"] for a in ls]
@@ -136,11 +139,16 @@ def listplayers(user=None):
 
 def listbidders():
     '''hello'''
-    ls=[]
-    for val in colbid.find().sort("BAvg"):
+    nls=[]
+    bls=[]
+    for val in colbid.find().sort('BAvg', pymongo.DESCENDING):
         if not val['Username'] in admin:
-            ls.append(val)
-    rls = {a["Username"]:a["BAvg"] for a in ls}
+            nls.append(val['Username'])
+            bls.append(val['BAvg'])
+    rls = [nls, bls]
+    #for i in xrange(len(ls)):
+        #rls[ls[i]['Username']] = ls[i]['BAvg']
+    #rls = {a["Username"]:a["BAvg"] for a in ls}
     return rls
 
 def addshare(bidder, player):
@@ -181,14 +189,16 @@ sign from the UI.'''
 
 def sharesavg(user):
     '''doc'''
-    usdata = colbid.find_one({'Username':user})['BValues']
+    usdata = colbid.find_one({'Username':user})['BUsers']
     total = 0
     count = 0
+    avg = 0
     for a in usdata:
         player = colbid.find_one({'Username':a})['PValue']
         total+= player
         count = count + 1
-    avg = (total/count) + (0.5*count)
+    if not count == 0:
+        avg = (total/count) + (0.5*count)
     colbid.update_one({'Username':user},{'$set':{'BAvg':avg}})
 
 def validateno(num):
