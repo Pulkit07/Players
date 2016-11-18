@@ -109,7 +109,7 @@ Returns False if the user does not exists.'''
 
     rs = colbid.find_one({"Username":name})
     if rs:
-        return [rs['Name'], rs['Entry No'], rs['PValue'], rs['BValue'], rs['BUsers']]
+        return [rs['Name'], rs['Entry No'], rs['PValue'], rs['BValue'], rs['BUsers'], rs['PEvents']]
     return False
 
 def listplayers(user=None):

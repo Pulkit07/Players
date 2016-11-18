@@ -76,12 +76,20 @@
     </div>
   </div>
   <div class="col-sm-6 playerinfo">
-    <h3 align="center">Player Info</h3>
+    <h3 align="center">Playing Info</h3>
     <p align="center">Share Value: {{pvalue}}</p>
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <span align="center">Players detailed Information</span>
+      {% if playing|length > 0 %}
+        <div class="panel-heading players-list">
+        {% for play in playing %}
+        <li>    {{play}}</li>
+        {% endfor %}
       </div>
+      {% else %}
+      <div class="panel-heading">
+        <span>No playing information available</span>
+      </div>
+      {% endif %}
     </div>
   </div>
 
