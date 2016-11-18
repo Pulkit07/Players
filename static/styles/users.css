@@ -50,6 +50,9 @@ a{
 	background-color: #3C5A99;
 	color: #fff;
 	width: 100%;
+	margin-top: 0%;
+	margin-left: 0%;
+	margin-right: 0%;
 }
 .navbar-default .navbar-nav>li>a
 {
