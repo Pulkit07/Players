@@ -18,6 +18,7 @@ from data import (
     listplayers,
     listbidders,
     activate,
+    updatebvalue,
 )
 
 app=Flask(__name__)
@@ -63,6 +64,9 @@ def signup():
 	return render_template('signup.html', title="Signup | Players")
     elif request.method == 'POST':
         name = request.form['reg_name']
+        if ' ' in name:
+            flash("Don't use space in usernames")
+            return redirect(url_for(signup))
         username = request.form['reg_username'].lower()
         entryno = request.form['reg_entryno']
         passw = request.form['reg_password']
@@ -193,7 +197,7 @@ def updatevalue():
         elif request.method == 'POST':
             user = request.form['username']
             value = request.form['value']
-            ret = activate(user, value)
+            ret = updatebvalue(user, value)
             if ret == 0:
                 return redirect(url_for('updatevalue'))
             elif ret == 1:

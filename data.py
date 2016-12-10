@@ -38,7 +38,7 @@ and 2 if the entry no. has an account previously.'''
     if colbid.find_one({"Entry No": dic[2]}):
         return 2 #Entry No. exists
     diction = {"Name": dic[0], "Username": dic[1], "Entry No": dic[2],\
-                "Password": dic[3], "PValue": meanpvalue(), "BValue": 200,\
+                "Password": dic[3], "PValue": 60, "BValue": 200,\
                 "BUsers": [], "PEvents":[], "Activated": False, "Aby":'',\
                 "BAvg": 0}
     colbid.insert_one(diction)
@@ -198,8 +198,56 @@ def sharesavg(user):
         total+= player
         count = count + 1
     if not count == 0:
-        avg = (total/count) + (0.5*count)
+        avg = (total/count) + (10*count)
     colbid.update_one({'Username':user},{'$set':{'BAvg':avg}})
+
+def decreaseall():
+    '''doc'''
+    for entry in colbid.find():
+        val = entry['PValue']
+        val = val - (val*5)/100
+        colbid.update_one({'Username':entry['Username']}, {'$set': {'PValue':val}})
+    for entry in colbid.find():
+        sharesavg(entry['Username'])
+
+def participant(user, msg):
+    '''doc'''
+    entry = colbid.find_one({'Username': user})
+    val = (entry['PValue']*100)/95
+    val = val + (val*5)/100
+    pev = entry['PEvents']
+    pev.append(msg)
+    colbid.update_one({'Username':user}, {'$set': {"PValue": val, 'PEvents': pev}})
+    for a in colbid.find():
+        sharesavg(entry['Username'])
+
+def coordinator(user, msg):
+    '''doc'''
+    entry = colbid.find_one({'Username': user})
+    val = (entry['PValue']*100)/95
+    val = val + (val*4)/100
+    pev = entry['PEvents']
+    pev.append(msg)
+    colbid.update_one({'Username':user}, {'$set': {"PValue": val, 'PEvents': pev}})
+    for a in colbid.find():
+        sharesavg(entry['Username'])
+
+def ranks(user, msg, num):
+    '''doc'''
+    entry = colbid.find_one({'Username': user})
+    val = (entry['PValue']*100)/95
+    if num == 1:
+        val = val + (val*20)/100
+    if num == 2:
+        val = val + (val*15)/100
+    if num == 3:
+        val = val + (val*10)/100
+    pev = entry['PEvents']
+    pev.append(msg)
+    colbid.update_one({'Username':user}, {'$set': {"PValue": val, 'PEvents': pev}})
+    for a in colbid.find():
+        sharesavg(entry['Username'])
+
 
 def validateno(num):
     '''Validates an entry number and convert it to a general format. We have a list
